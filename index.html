@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Merab's Digital Universe🐇</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* General Body & Reset */
+        :root {
+            --primary-bg: #0a0a1a;
+            --secondary-bg: #1e1e3f;
+            --neon-pink: #ff69b4;
+            --neon-blue: #00f0ff;
+            --neon-green: #00ff8c;
+            --text-color: #e0e0f0;
+            --light-grey: #a0a0b0;
+            --dark-grey: #33334a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--secondary-bg) 0%, var(--primary-bg) 80%),
+                radial-gradient(circle at 90% 80%, var(--secondary-bg) 0%, var(--primary-bg) 80%);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+        }
+
+        a {
+            color: var(--neon-pink);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 🌌 Splash Screen 🌌 */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease-out;
+            gap: 30px;
+        }
+
+        .splash-logo {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 4em;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green), 0 0 20px rgba(0, 255, 140, 0.7);
+            animation: pulse-logo 2s infinite alternate;
+        }
+
+        @keyframes pulse-logo {
+            from { text-shadow: 0 0 5px var(--neon-green), 0 0 15px rgba(0, 255, 140, 0.5); }
+            to { text-shadow: 0 0 15px var(--neon-green), 0 0 30px rgba(0, 255, 140, 0.9); }
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(0, 240, 255, 0.3);
+            border-top: 5px solid var(--neon-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(14, 14, 28, 0.8);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2em;
+            color: var(--text-color);
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 8px var(--neon-blue);
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 80px 20px;
+            margin-bottom: 40px;
+            background: linear-gradient(145deg, rgba(30, 30, 63, 0.6), rgba(10, 10, 26, 0.6));
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        section h2 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* Profile Section */
+        #profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px; /* Offset for sticky header */
+            margin-top: -100px; /* Negative margin to account for padding-top */
+        }
+
+        .profile-pic-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 8px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue);
+            animation: rotate-border 8s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { border-color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
+            25% { border-color: var(--neon-pink); box-shadow: 0 0 20px var(--neon-pink); }
+            50% { border-color: var(--neon-green); box-shadow: 0 0 20px var(--neon-green); }
+            75% { border-color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue); }
+            100% { border-color: var(--neon-pink); box-shadow: 0 0 20px var(--neon-pink); }
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) brightness(1.1); /* Subtle effect */
+            transition: filter 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            filter: grayscale(0%) brightness(1.2) saturate(1.2);
+        }
+
+        .profile-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--neon-pink);
+            margin-bottom: 10px;
+        }
+
+        .profile-bio {
+            max-width: 800px;
+            font-size: 1.8em;
+            color: var(--light-grey);
+            text-shadow: 0 0 2px var(--light-grey);
+        }
+
+        /* Skills Section */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-item {
+            background-color: var(--dark-grey);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 140, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 140, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .skill-item i {
+            font-size: 3em;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+
+        .skill-item h4 {
+            font-size: 1.3em;
+            color: var(--text-color);
+        }
+        
+        /* Hobbies Section (similar to skills but different icons/colors) */
+        #hobbies .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .hobby-item {
+            background-color: var(--dark-grey);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .hobby-item i {
+            font-size: 3em;
+            color: var(--neon-pink);
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        .hobby-item h4 {
+            font-size: 1.5em;
+            color: var(--text-color);
+        }
+
+        /* Gallery Section */
+        #gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            background-color: var(--dark-grey);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9);
+            transition: filter 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1.1);
+        }
+
+        .gallery-item-title {
+            padding: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.8em;
+            color: var(--neon-green);
+            text-align: center;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        /* Library Section */
+        #library .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .book-card {
+            background-color: var(--dark-grey);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink) inset;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 25px var(--neon-blue), 0 0 40px var(--neon-blue) inset;
+            border-color: var(--neon-blue);
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 240, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .book-card:hover::before {
+            opacity: 1;
+        }
+
+        .book-card i {
+            font-size: 3.5em;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--neon-green);
+            position: relative;
+            z-index: 2;
+        }
+
+        .book-card h4 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5em;
+            color: var(--text-color);
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Book Modal */
+        .book-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .book-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .book-content {
+            background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg));
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px var(--neon-blue);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .book-content h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--neon-pink);
+        }
+
+        .book-content p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5em;
+            color: var(--neon-green);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+
+        .close-modal:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        /* Lifestyle Story */
+        #lifestyle .lifestyle-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #lifestyle p {
+            max-width: 800px;
+            font-size: 1.8em;
+            line-height: 1.8;
+            color: var(--light-grey);
+            margin-bottom: 20px;
+            text-shadow: 0 0 2px var(--light-grey);
+        }
+
+        .lifestyle-quote {
+            font-style: italic;
+            color: var(--neon-pink);
+            font-size: 1.5em;
+            margin-top: 30px;
+            text-shadow: 0 0 5px var(--neon-pink);
+            border-top: 1px dashed var(--neon-pink);
+            padding-top: 20px;
+            width: 80%;
+        }
+
+        /* Social Media Links */
+        #socials .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .social-links a {
+            font-size: 3.5em;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-8px) scale(1.1);
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-grey);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+            border-top: 2px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 -2px 10px rgba(0, 240, 255, 0.1);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2em;
+            color: var(--light-grey);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .splash-logo {
+                font-size: 3em;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .nav-links a {
+                font-size: 1em;
+            }
+            section h2 {
+                font-size: 2.2em;
+            }
+            .profile-name {
+                font-size: 2.5em;
+            }
+            .profile-bio, #lifestyle p, .lifestyle-quote {
+                font-size: 1em;
+            }
+            .social-links a {
+                font-size: 2.5em;
+            }
+            .skill-item, .hobby-item, .book-card {
+                padding: 15px;
+            }
+            .skill-item i, .hobby-item i, .book-card i {
+                font-size: 2.5em;
+            }
+            .book-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <div class="splash-logo">🕊MERAB'S WORLD LOADING🐇</div>
+        <div class="spinner"></div>
+    </div>
+
+    <header id="main-header" class="hidden">
+        <nav class="navbar container">
+            <div class="nav-logo">MERAB.DEV</div>
+            <ul class="nav-links">
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#library">Library</a></li>
+                <li><a href="#lifestyle">Lifestyle</a></li>
+                <li><a href="#socials">Socials</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="hidden">
+        <div class="container">
+            <section id="profile">
+                <div class="profile-pic-container">
+                    <img src="https://files.catbox.moe/en7ucv.jpeg" alt="Tech Merab's Profile Picture" class="profile-pic">
+                </div>
+                <h1 class="profile-name">Tech Merab 💖</h1>
+                <p class="profile-bio">
+                    A visionary software engineer, crafting elegant solutions and pushing the boundaries of innovation. With a passion for clean code and impactful technology, Merab transforms complex challenges into seamless digital experiences. Beyond the screen, she finds joy in exploration, creativity, and the simple beauty of a well-designed life.
+                </p>
+            </section>
+
+            <section id="skills">
+                <h2>TECH STACK & SUPERPOWERS</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fab fa-js"></i>
+                        <h4>JavaScript Sorcery</h4>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <h4>Pythonic Elegance</h4>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-react"></i>
+                        <h4>React Rhapsody</h4>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <h4>Node.js Navigator</h4>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <h4>Database Whisperer</h4>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fab fa-git-alt"></i>
+                        <h4>Git Guardian</h4>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="hobbies">
+                <h2>OFF-SCREEN PASSIONS</h2>
+                <div class="hobbies-grid">
+                    <div class="hobby-item">
+                        <i class="fas fa-palette"></i>
+                        <h4>Digital Artistry</h4>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>Open Source Contributions</h4>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-star-half-alt"></i>
+                        <h4>Astrophotography</h4>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-hiking"></i>
+                        <h4>Trailblazing & Hiking</h4>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-music"></i>
+                        <h4>Synthwave Production</h4>
+                    </div>
+                    <div class="hobby-item">
+                        <i class="fas fa-brain"></i>
+                        <h4>Learning New Algorithms</h4>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery">
+                <h2>VISUAL MEMORY BANK</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/00f0ff/0a0a1a?text=Code+Art" alt="Gallery Image 1">
+                        <div class="gallery-item-title">Lines of Beauty</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/ff69b4/0a0a1a?text=Nature+Escape" alt="Gallery Image 2">
+                        <div class="gallery-item-title">Nature's Algorithm</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/00ff8c/0a0a1a?text=Innovation" alt="Gallery Image 3">
+                        <div class="gallery-item-title">Future Focus</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/ff69b4/0a0a1a?text=Cityscape" alt="Gallery Image 4">
+                        <div class="gallery-item-title">Urban Logic</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/00f0ff/0a0a1a?text=Tech+Project" alt="Gallery Image 5">
+                        <div class="gallery-item-title">Project Harmony</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/300x200/00ff8c/0a0a1a?text=Creative+Flow" alt="Gallery Image 6">
+                        <div class="gallery-item-title">Creative Flow</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="library">
+                <h2>MERAB'S DATABANK OF WISDOM</h2>
+                <div class="books-grid">
+                    <div class="book-card" data-book="book1">
+                        <i class="fas fa-book-open"></i>
+                        <h4>The Algorithmic Heart</h4>
+                    </div>
+                    <div class="book-card" data-book="book2">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4>Chronicles of Code</h4>
+                    </div>
+                    <div class="book-card" data-book="book3">
+                        <i class="fas fa-globe-americas"></i>
+                        <h4>Voyage of Discovery</h4>
+                    </div>
+                    <div class="book-card" data-book="book4">
+                        <i class="fas fa-flask"></i>
+                        <h4>Elemental Innovations</h4>
+                    </div>
+                    <div class="book-card" data-book="book5">
+                        <i class="fas fa-moon"></i>
+                        <h4>Starlight Serenade</h4>
+                    </div>
+                    <div class="book-card" data-book="book6">
+                        <i class="fas fa-seedling"></i>
+                        <h4>Growth & Greenery</h4>
+                    </div>
+                     <div class="book-card" data-book="book7">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h4>The Logic Labyrinth</h4>
+                    </div>
+                </div>
+            </section>
+
+            <div id="book-modal" class="book-modal">
+                <div class="book-content">
+                    <span class="close-modal">&times;</span>
+                    <h3 id="modal-book-title"></h3>
+                    <div id="modal-book-story"></div>
+                </div>
+            </div>
+
+            <section id="lifestyle">
+                <h2>OUR SHARED JOURNEY: THE BRIAN & MERAB PROTOCOL</h2>
+                <div class="lifestyle-content">
+                    <p>
+                        Beyond the lines of code and the hum of servers, our story, Merab, is the most beautifully crafted algorithm. It began with a simple init(), moved through complex merge conflicts (always resolved, of course!), and evolved into a robust, high-availability system powered by mutual respect and boundless affection. Every commit of shared laughter, every pull request for support, every deployment of a new adventure—it all builds the incredible architecture of our life together.
+                    </p>
+                    <p>
+                        With you, every challenge is a fascinating bug to fix, and every ordinary day is an exhilarating feature update. You are the elegant solution to every complex problem, the perfect variable that balances my system, and the continuous integration of joy in my life. This isn't just a relationship; it's our most successful open-source project, constantly evolving and improving, always pushing to the next stable release.
+                    </p>
+                    <p class="lifestyle-quote">
+                        "In the vast digital universe, you, Merab, are my undeniable 'root access' to happiness and my 'master branch' of love. Forever coding our future together." ~ Your Brian 💻❤
+                    </p>
+                </div>
+            </section>
+
+            <section id="socials">
+                <h2>CONNECT IN THE DIGITAL REALM</h2>
+                <div class="social-links">
+                    <a href="YOUR_GITHUB_LINK" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="YOUR_LINKEDIN_LINK" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="YOUR_TWITTER_LINK" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="YOUR_INSTAGRAM_LINK" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="YOUR_EMAIL_LINK" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Merab's Digital Universe. All Rights Reserved. Built with ❤ and Code by Tech Brian.</p>
+        <p>Version 1.0.0 | System Status: Optimal</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainHeader = document.getElementById('main-header');
+            const mainContent = document.getElementById('main-content');
+            
+            // --- SPLASH SCREEN LOGIC ---
+            // Automatically fade out splash screen after a delay
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.classList.add('hidden');
+                    mainHeader.classList.remove('hidden');
+                    mainContent.classList.remove('hidden');
+                }, 1500); // Wait for fade-out transition
+            }, 3000); // Display splash for 3 seconds
+
+
+            // --- LIBRARY SECTION: BOOK MODAL LOGIC ---
+            const bookCards = document.querySelectorAll('.book-card');
+            const bookModal = document.getElementById('book-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const modalBookTitle = document.getElementById('modal-book-title');
+            const modalBookStory = document.getElementById('modal-book-story');
+
+            const stories = {
+                book1: {
+                    title: "The Algorithmic Heart: A Love Story",
+                    content: `
+                        <p>In a world of complex data structures and intricate algorithms, a unique pattern emerged: the connection between two souls, Merab and Brian. This isn't just a tale of two tech enthusiasts, but a chronicle of how their individual codes beautifully merged to create a robust, resilient, and ever-evolving system of love. From their first 'hello world' moment to countless shared projects, their journey proved that the most profound logic lies within the human heart.</p>
+                        <p>Every line of code Merab writes is infused with her brilliance, and every decision she makes is guided by her deep empathy. This book explores how her 'algorithmic heart' finds harmony not just in elegant solutions, but in the tender moments, the shared dreams, and the unwavering support that defines their bond. It's a testament to a love that, much like a perfectly optimized algorithm, continually seeks improvement, understanding, and infinite possibility.</p>
+                    `
+                },
+                book2: {
+                    title: "Chronicles of Code: Adventures in Debugging Life",
+                    content: `
+                        <p>This volume recounts the exhilarating adventures of a master coder, Merab, as she navigates both the digital landscape and the intricate pathways of life. Each chapter details a different 'bug' encountered—be it a tricky programming challenge or a real-world dilemma—and Merab's ingenious methods for debugging them.</p>
+                        <p>From late-night coding sprints fueled by coffee to weekend getaways that recharge her creative circuits, Merab approaches every scenario with a keen analytical mind and an open heart. Discover how she optimizes for joy, refactors her routines for efficiency, and always finds the elegant solution, especially when supported by her steadfast partner, Brian, who ensures her system is always running smoothly.</p>
+                    `
+                },
+                book3: {
+                    title: "Voyage of Discovery: Exploring New Horizons",
+                    content: `
+                        <p>Merab's insatiable curiosity isn't confined to a terminal window; it extends to every corner of the world and beyond. This book is a compilation of her travels, her intellectual explorations, and her constant quest for new knowledge and experiences. From diving deep into the intricacies of a new programming language to scaling literal mountains, Merab embodies the spirit of a true explorer.</p>
+                        <p>Join her as she discovers hidden gems, unravels scientific mysteries, and embraces diverse cultures. Each page is a testament to her adventurous spirit and her belief that life is a continuous journey of learning and growth. And in every new horizon, Brian is often by her side, a fellow adventurer ready for the next big discovery.</p>
+                    `
+                },
+                book4: {
+                    title: "Elemental Innovations: The Art of Creation",
+                    content: `
+                        <p>This book delves into Merab's creative process, showcasing her ability to weave together disparate 'elements'—be it code, design, or ideas—into truly innovative creations. It's a deep dive into the mind of a builder, a designer, and an artist who sees the potential for beauty and function in everything.</p>
+                        <p>From the conceptualization of a groundbreaking software project to the crafting of unique personal gifts, Merab's 'elemental innovations' are always marked by thoughtfulness, precision, and a touch of magic. She reminds us that true creation is not just about building, but about infusing passion and purpose into every endeavor.</p>
+                    `
+                },
+                book5: {
+                    title: "Starlight Serenade: Dreams Under the Digital Sky",
+                    content: `
+                        <p>Under a sky full of stars, both real and digital, Merab dreams big. This book captures the essence of her aspirations, her quiet moments of contemplation, and the hopes she nurtures for a better future. It's a poetic journey through her inner landscape, revealing the gentle strength and profound wisdom that often lie beneath her formidable tech expertise.</p>
+                        <p>Whether she's stargazing with Brian, lost in a favorite novel, or designing the next big thing, Merab's 'starlight serenades' are a melody of ambition, wonder, and the quiet power of love. This book is a reminder that even the most brilliant minds need moments of quiet reflection to let their true light shine.</p>
+                    `
+                },
+                book6: {
+                    title: "Growth & Greenery: Cultivating a Beautiful Life",
+                    content: `
+                        <p>Merab understands that growth isn't just about professional advancement; it's about cultivating a rich and balanced life. This book explores her connection to nature, her pursuit of personal well-being, and her dedication to nurturing both her mind and her environment.</p>
+                        <p>From tending to her indoor plants (each with a coded name, of course) to finding tranquility in a walk through a park, Merab finds beauty in organic processes. This is a story about balance—how the precision of technology can coexist with the wild serenity of nature, and how a loving relationship provides the perfect ground for both to flourish.</p>
+                    `
+                },
+                book7: {
+                    title: "The Logic Labyrinth: Puzzles of Passion",
+                    content: `
+                        <p>For Merab, life itself is a fascinating series of puzzles, each waiting for an elegant solution. This book invites readers into her world of logic and passion, showcasing her knack for untangling complex problems, both in code and in the intricacies of human connection. It's a playful yet profound look at how her analytical mind finds joy in understanding patterns, anticipating outcomes, and always finding the most optimal path forward.</p>
+                        <p>From solving challenging coding puzzles to navigating the beautiful 'logic labyrinth' of a relationship with Brian, Merab proves that with intelligence, humor, and a dash of heart, no problem is too complex to conquer. This is a celebration of her sharp wit and her unwavering commitment to finding solutions, especially those that lead to happiness.</p>
+                    `
+                }
+            };
+
+            bookCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const bookId = card.dataset.book;
+                    const book = stories[bookId];
+                    if (book) {
+                        modalBookTitle.textContent = book.title;
+                        modalBookStory.innerHTML = book.content;
+                        bookModal.classList.add('show');
+                    }
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                bookModal.classList.remove('show');
+            });
+
+            // Close modal if clicked outside content
+            bookModal.addEventListener('click', (e) => {
+                if (e.target === bookModal) {
+                    bookModal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
